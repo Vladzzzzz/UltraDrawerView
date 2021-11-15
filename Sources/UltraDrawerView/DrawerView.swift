@@ -100,8 +100,8 @@ open class DrawerView: UIView {
         }
     }
 
-    public init(content: Content, headerView: UIView) {
-        self.snappingView = SnappingView(content: content, headerView: headerView)
+    public init(content: Content, headerView: UIView, footerView: UIView) {
+        self.snappingView = SnappingView(content: content, headerView: headerView, footerView: footerView)
  
         super.init(frame: .zero)
         
@@ -116,6 +116,10 @@ open class DrawerView: UIView {
     
     open var headerView: UIView {
         return snappingView.headerView
+    }
+
+    open var footerView: UIView {
+        return snappingView.footerView
     }
     
     open var containerView: UIView {
