@@ -1,5 +1,5 @@
 PODS:
-  - UltraDrawerView (0.6.3)
+  - UltraDrawerView (0.6.31)
 
 DEPENDENCIES:
   - UltraDrawerView (from `../`)
