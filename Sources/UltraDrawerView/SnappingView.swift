@@ -21,6 +21,8 @@ open class SnappingView: UIView {
     public let content: Content
     
     public let headerView: UIView
+
+    public let footerView: UIView
     
     /// The view containing the header view and the content view.
     /// It represents the visible and tappable area of the SnappingView.
@@ -51,9 +53,10 @@ open class SnappingView: UIView {
     /// Animation parameters for the transitions between anchors
     open var animationParameters: AnimationParameters = .spring(.default)
     
-    public init(content: Content, headerView: UIView) {
+    public init(content: Content, headerView: UIView, footerView: UIView) {
         self.content = content
         self.headerView = headerView
+        self.footerView = footerView
         self.containerView = UIView()
         self.origin = 0
         self.anchors = []
@@ -106,6 +109,7 @@ open class SnappingView: UIView {
         content.addListener(self)
         
         containerView.addSubview(headerView)
+        containerView.addSubview(footerView)
         containerView.addGestureRecognizer(headerPanRecognizer)
         headerPanRecognizer.addTarget(self, action: #selector(handleHeaderPanRecognizer))
         
@@ -127,6 +131,12 @@ open class SnappingView: UIView {
         headerView.set([.left, .right, .top], equalTo: containerView)
         if headerView.constraints.isEmpty, !type(of: headerView).requiresConstraintBasedLayout {
             headerView.set(.height, equalTo: headerView.frame.height)
+        }
+
+        footerView.translatesAutoresizingMaskIntoConstraints = false
+        footerView.set([.left, .right, .bottom], equalTo: containerView)
+        if footerView.constraints.isEmpty, !type(of: footerView).requiresConstraintBasedLayout {
+            footerView.set(.height, equalTo: footerView.frame.height)
         }
     }
     
